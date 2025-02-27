@@ -3,9 +3,6 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import numpy as np
 import pickle
-from fastapi.middleware.cors import CORSMiddleware
-
-
 
 app = FastAPI(title="California Housing Prediction API")
 
@@ -13,13 +10,6 @@ app = FastAPI(title="California Housing Prediction API")
 @app.get("/")
 def read_index():
     return FileResponse("index.html")
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Change this to your frontend URL for better security
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # Load your saved models (ensure these files are in the same directory)
 with open("tuned_rf_model.pkl", "rb") as f:
