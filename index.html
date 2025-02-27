@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>California Housing Prediction</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h1>California Housing Prediction</h1>
+  <form id="predictionForm">
+    <div class="form-group">
+      <label for="MedInc">MedInc</label>
+      <input type="number" step="any" class="form-control" id="MedInc" required>
+    </div>
+    <div class="form-group">
+      <label for="HouseAge">HouseAge</label>
+      <input type="number" step="any" class="form-control" id="HouseAge" required>
+    </div>
+    <div class="form-group">
+      <label for="AveRooms">AveRooms</label>
+      <input type="number" step="any" class="form-control" id="AveRooms" required>
+    </div>
+    <div class="form-group">
+      <label for="AveBedrms">AveBedrms</label>
+      <input type="number" step="any" class="form-control" id="AveBedrms" required>
+    </div>
+    <div class="form-group">
+      <label for="Population">Population</label>
+      <input type="number" step="any" class="form-control" id="Population" required>
+    </div>
+    <div class="form-group">
+      <label for="AveOccup">AveOccup</label>
+      <input type="number" step="any" class="form-control" id="AveOccup" required>
+    </div>
+    <div class="form-group">
+      <label for="Latitude">Latitude</label>
+      <input type="number" step="any" class="form-control" id="Latitude" required>
+    </div>
+    <div class="form-group">
+      <label for="Longitude">Longitude</label>
+      <input type="number" step="any" class="form-control" id="Longitude" required>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="predictRegression()">Predict Regression</button>
+    <button type="button" class="btn btn-secondary" onclick="predictClassification()">Predict Classification</button>
+  </form>
+  <div id="result" class="mt-3"></div>
+</div>
+<script>
+  function getFormData() {
+    return {
+      MedInc: parseFloat(document.getElementById('MedInc').value),
+      HouseAge: parseFloat(document.getElementById('HouseAge').value),
+      AveRooms: parseFloat(document.getElementById('AveRooms').value),
+      AveBedrms: parseFloat(document.getElementById('AveBedrms').value),
+      Population: parseFloat(document.getElementById('Population').value),
+      AveOccup: parseFloat(document.getElementById('AveOccup').value),
+      Latitude: parseFloat(document.getElementById('Latitude').value),
+      Longitude: parseFloat(document.getElementById('Longitude').value)
+    };
+  }
+
+  function predictRegression() {
+    const data = getFormData();
+    fetch('/predict/regression', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+      document.getElementById('result').innerHTML =
+        `<h3>Regression Prediction:</h3><p>${result.predicted_median_house_value}</p>`;
+    })
+    .catch(error => console.error('Error:', error));
+  }
+
+  function predictClassification() {
+    const data = getFormData();
+    fetch('/predict/classification', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+      document.getElementById('result').innerHTML =
+        `<h3>Classification Prediction:</h3><p>${result.predicted_category}</p>`;
+    })
+    .catch(error => console.error('Error:', error));
+  }
+</script>
+</body>
+</html>
