@@ -3,6 +3,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import numpy as np
 import pickle
+import requests
 
 app = FastAPI(title="California Housing Prediction API")
 
@@ -12,10 +13,8 @@ def read_index():
     return FileResponse("index.html")
 
 # Load your saved models (ensure these files are in the same directory)
-with open("tuned_rf_model.pkl", "rb") as f:
-    regression_model = pickle.load(f)
-with open("tuned_rf_classifier.pkl", "rb") as f:
-    classification_model = pickle.load(f)
+CLASSIFIER_URL = "https://drive.google.com/file/d/1GBPmrVN4dm0Ut2DkvWXq0gYXFYoeiFXn/view?usp=sharing"
+REGRESSOR_URL = "https://drive.google.com/file/d/17B_Vc1Q_RriECHsV61aucoAbGGcffc2v/view?usp=sharing"
 
 # Define input data model
 class DataInput(BaseModel):
