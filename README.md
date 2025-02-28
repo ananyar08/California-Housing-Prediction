@@ -10,5 +10,22 @@ This is a **FastAPI-based machine learning API** for predicting housing prices a
 - **Deployable on Render / Streamlit**
 - **Model Download from Google Drive**
 
+📌 Installation & Setup
+1️⃣ Clone the Repository
 
+git clone https://github.com/your-username/California-Housing-Prediction.git
+cd California-Housing-Prediction
+
+2️⃣ Install Dependencies
+
+pip install -r requirements.txt
+
+3️⃣ Run the API Locally
+
+uvicorn main:app --reload
+
+4️⃣ Access API Documentation
+
+   Swagger UI: http://127.0.0.1:8000/docs
+   ReDoc: http://127.0.0.1:8000/redoc
 
