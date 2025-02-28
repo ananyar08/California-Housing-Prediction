@@ -238,20 +238,22 @@
     })
     .then(response => response.json())
     .then(result => {
-      const category = result.predicted_category;
+      const category = result.predicted_category.trim().toLowerCase();
       let explanation = "";
 
-      if (category === "Affordable") {
-        explanation = "This area is classified as affordable, meaning housing prices are relatively low compared to other regions.";
-      } else if (category === "Moderate") {
-        explanation = "This area falls in the moderate category, indicating an average cost of living and housing prices.";
-      } else {
-        explanation = "This area is classified as expensive, meaning the housing prices are significantly higher than the median value.";
-      }
+      if (category === "low") {
+            explanation = "This area is classified as affordable, meaning housing prices are relatively low compared to other regions.";
+        } else if (category === "moderate") {
+            explanation = "This area falls in the moderate category, indicating an average cost of living and housing prices.";
+        } else if (category === "high") {
+            explanation = "This area is classified as expensive, meaning the housing prices are significantly higher than the median value.";
+        } else {
+            explanation = "Unknown classification. Please check the input values.";
+        }
 
       document.getElementById('result').innerHTML = `
         <h3>Classification Prediction:</h3>
-        <p><strong>Category:</strong> ${category}</p>
+         <p><strong>Category:</strong> ${category.charAt(0).toUpperCase() + category.slice(1)}</p>
         <p><em>${explanation}</em></p>
       `;
     })
