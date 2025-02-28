@@ -210,7 +210,7 @@
     };
   }
 
-  function predictRegression() {
+function predictRegression() {
     const data = getFormData();
     fetch('/predict/regression', {
       method: 'POST',
@@ -222,12 +222,13 @@
       const predictedValue = result.predicted_median_house_value.toFixed(2);
       document.getElementById('result').innerHTML = `
         <h3>Regression Prediction:</h3>
-        <p><strong>Estimated House Price:</strong> $${predictedValue}</p>
+        <p><strong>Estimated House Price:</strong> $${predictedValue}M</p>
         <p><em>This is the predicted median house value in the given area based on input features like income, house age, and population density.</em></p>
       `;
     })
     .catch(error => console.error('Error:', error));
-  }
+}
+
 
   function predictClassification() {
     const data = getFormData();
