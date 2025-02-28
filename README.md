@@ -13,7 +13,7 @@ This is a **FastAPI-based machine learning API** for predicting housing prices a
 📌 Installation & Setup
 1️⃣ Clone the Repository
 
-git clone https://github.com/your-username/California-Housing-Prediction.git
+git clone https://github.com/ananyar08/California-Housing-Prediction.git
 cd California-Housing-Prediction
 
 2️⃣ Install Dependencies
